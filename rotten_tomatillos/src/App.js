@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import movieData from 'rotten_tomatillos/src/fake_movie_data.js'
+import movieData from './fake_movie_data.js'
 import './App.css';
 
 function App() {
