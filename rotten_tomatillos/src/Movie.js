@@ -1,12 +1,11 @@
 import React from 'react'
+import './Movie.css'
 
 const Movies = ({ movies }) => {
 
   const movieCards = movies.map(movie => {
     return (
-        <div>
-          <img src={movie.poster_path} width='100vw' />
-        </div>
+       <img className='movie-image' src={movie.poster_path} />
     )
   })
 

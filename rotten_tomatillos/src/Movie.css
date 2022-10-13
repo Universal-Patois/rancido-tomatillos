@@ -1,0 +1,10 @@
+.movie-image {
+  width: 20vw;
+  margin: 20px;
+
+}
+
+.movies-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
+}
