@@ -17,12 +17,13 @@ selectMovie = (id) => {
   const selectedMovie = this.state.movies.find(movie => movie.id === id)
   this.setState({ movies: movieData.movies, selectedMovie: selectedMovie})
   document.querySelector('.movies-container').classList.add('hidden')
+  document.querySelector('.single-movie').classList.remove('hidden')
 }
 
 clickBackButton = () => {
-  console.log('Click')
   this.setState({ movies: movieData.movies, selectedMovie: ''})
   document.querySelector('.movies-container').classList.remove('hidden')
+  document.querySelector('.single-movie').classList.add('hidden')
 }
 
   render() { 

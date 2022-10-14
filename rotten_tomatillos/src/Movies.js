@@ -10,6 +10,7 @@ const Movies = ({ movies, selectMovie }) => {
        className='movie-image' 
        src={movie.poster_path} 
        onClick={() => selectMovie(movie.id)}
+       key={movie.id}
        />
     )
   })

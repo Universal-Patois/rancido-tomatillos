@@ -1,4 +1,12 @@
+.single-movie{
+  display: flex;
+}
+
 .movie-image {
   width: 20vw;
   margin: 20px;
+}
+
+.hidden {
+  display: none;
 }
