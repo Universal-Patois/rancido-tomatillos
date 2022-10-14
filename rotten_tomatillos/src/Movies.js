@@ -1,11 +1,16 @@
 import React from 'react'
-import './Movie.css'
+import './Movies.css'
 
-const Movies = ({ movies }) => {
+const Movies = ({ movies, selectMovie }) => {
 
   const movieCards = movies.map(movie => {
+
     return (
-       <img className='movie-image' src={movie.poster_path} />
+       <img 
+       className='movie-image' 
+       src={movie.poster_path} 
+       onClick={() => selectMovie(movie.id)}
+       />
     )
   })
 
