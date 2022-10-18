@@ -6,7 +6,7 @@ const MovieDescription = ({ selectedMovie, clickBackButton }) => {
       <div className="single-movie hidden" 
            style={{
             backgroundImage: `url(${selectedMovie.backdrop_path})`, 
-            backgroundSize: 'cover',
+            backgroundSize: '100vw',
           }}
           >
         <img className='movie-image' src={selectedMovie.poster_path}></img>

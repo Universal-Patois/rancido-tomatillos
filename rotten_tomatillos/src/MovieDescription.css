@@ -1,10 +1,12 @@
 .single-movie{
   display: flex;
+  width: 100vw;
 }
 
-.movie-image {
-  width: 20vw;
-  margin: 20px;
+.movie-info {
+  padding: 2vw;
+  margin: 2vh 0vh;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .hidden {
