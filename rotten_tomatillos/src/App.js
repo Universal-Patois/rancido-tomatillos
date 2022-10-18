@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Movies from "./Movies.js";
 import MovieDescription from './MovieDescription.js';
 import { Route } from 'react-router-dom';
-// import movieData from './fake_movie_data.js'
 import './App.css';
 
 class App extends Component {
@@ -31,16 +30,12 @@ fetchSingleMovie = (id) => {
 
 selectMovie = (id) => {
   this.fetchSingleMovie(id)
-  // const selectedMovie = this.state.movies.find(movie => movie.id === id)
-  // this.setState({ ...this.state, selectedMovie: selectedMovie})
-  // document.querySelector('.movies-container').classList.add('hidden')
-  // document.querySelector('.single-movie').classList.remove('hidden')
 }
 
 clickBackButton = () => {
   this.setState({ ...this.state, selectedMovie: ''})
-  // document.querySelector('.movies-container').classList.remove('hidden')
-  // document.querySelector('.single-movie').classList.add('hidden')
+  document.querySelector('.movies-container').classList.remove('hidden')
+  document.querySelector('.single-movie').classList.add('hidden')
 }
 
   render() { 
@@ -48,25 +43,19 @@ clickBackButton = () => {
       <div className="App">
         <h1 className='App-header'>Rancid Tomatillos</h1>
         {this.state.error && <h2>{this.state.error}</h2>}
-        
         {/* <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> */}
+        {/* <MovieDescription selectedMovie={this.state.selectedMovie} clickBackButton={this.clickBackButton}/> */}
 
-        <Route exact path='/' render={ () => <Movies movies={this.state.movies} selectMovie={this.selectMovie}/> } />
+        <Route exact path='/' render={() => <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> } />
 
         <Route 
         exact path={`/${this.state.selectedMovie.id}`} 
-        render={() => <MovieDescription 
-        selectedMovie={this.state.selectedMovie} 
-        clickBackButton={this.clickBackButton}/>} 
+        render={() => <MovieDescription selectedMovie={this.state.selectedMovie} 
+        clickBackBtn={this.clickBackBtn} /> } 
         />
-
-         {/* <MovieDescription selectedMovie={this.state.selectedMovie} clickBackButton={this.clickBackButton}/> */}
-
       </div>
     )
   };
 }
-
-// <Route exact path='/' render={ () => <Movies movies={this.state.movies} selectMovie={this.selectMovie} />
 
 export default App;
