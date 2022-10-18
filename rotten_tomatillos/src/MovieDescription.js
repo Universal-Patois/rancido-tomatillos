@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './MovieDescription.css';
 
 const MovieDescription = ({ selectedMovie, clickBackButton }) => {
-    return (
-      <div className="single-movie hidden" 
+  return (
+      <div className="single-movie" 
            style={{
             backgroundImage: `url(${selectedMovie.backdrop_path})`, 
             backgroundSize: '100vw',
@@ -14,7 +15,7 @@ const MovieDescription = ({ selectedMovie, clickBackButton }) => {
           <h3>Title: {selectedMovie.title}</h3>
           <h4 className="rating">Rating: {selectedMovie.average_rating}</h4>
           <h4 className="release-date">Release Date: {selectedMovie.release_date}</h4>
-          <button onClick={clickBackButton}>Back</button>
+        <button onClick={clickBackButton}>Back</button>
         </div>
       </div>
     )
