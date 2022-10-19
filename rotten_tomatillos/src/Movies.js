@@ -1,17 +1,19 @@
 import React from 'react'
 import './Movies.css'
+import { NavLink } from "react-router-dom";
 
-const Movies = ({ movies, selectMovie }) => {
+const Movies = ({ movies }) => {
 
   const movieCards = movies.map(movie => {
 
     return (
-       <img 
-       className='movie-image' 
-       src={movie.poster_path} 
-       onClick={() => selectMovie(movie.id)}
-       key={movie.id}
-       />
+      <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+        <img 
+          className='movie-image' 
+          src={movie.poster_path} 
+          
+        />
+      </NavLink>
     )
   })
 
