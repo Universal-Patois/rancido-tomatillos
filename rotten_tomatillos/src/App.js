@@ -27,21 +27,16 @@ class App extends Component {
         <h1 className='App-header'>Rancid Tomatillos</h1>
         {this.state.error && <h2>{this.state.error}</h2>}
         <Switch>
-
-          <Route exact path='/'>        
-            <Movies movies={this.state.movies} />
-          </Route>
-
+          <Route exact path='/' render={ () => <Movies movies={this.state.movies} />} />        
           <Route path='/movies/:id' render={({ match }) => {
             const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id) )
-            return <MovieDescription selectedMovie={selectedMovie} />} } 
+            return <MovieDescription selectedMovie={selectedMovie} />
+          }} 
           />
-
         </Switch>
-        
       </div>
     )
-  };
+  }
 }
 
 export default App;
