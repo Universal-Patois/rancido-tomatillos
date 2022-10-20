@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Movies from "./Movies.js";
 import MovieDescription from './MovieDescription.js';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -34,8 +34,8 @@ selectMovie = (id) => {
 
 clickBackButton = () => {
   this.setState({ ...this.state, selectedMovie: ''})
-  document.querySelector('.movies-container').classList.remove('hidden')
-  document.querySelector('.single-movie').classList.add('hidden')
+  // document.querySelector('.movies-container').classList.remove('hidden')
+  // document.querySelector('.single-movie').classList.add('hidden')
 }
 
   render() { 
@@ -45,14 +45,15 @@ clickBackButton = () => {
         {this.state.error && <h2>{this.state.error}</h2>}
         {/* <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> */}
         {/* <MovieDescription selectedMovie={this.state.selectedMovie} clickBackButton={this.clickBackButton}/> */}
+        <Switch>
+          <Route exact path='/' render={() => <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> } />
+          <Route 
+            exact path={`/${this.state.selectedMovie.id}`} 
+            render={() => <MovieDescription selectedMovie={this.state.selectedMovie} 
+            clickBackBtn={this.clickBackBtn} /> } 
+          />
+        </Switch>
 
-        <Route exact path='/' render={() => <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> } />
-
-        <Route 
-        exact path={`/${this.state.selectedMovie.id}`} 
-        render={() => <MovieDescription selectedMovie={this.state.selectedMovie} 
-        clickBackBtn={this.clickBackBtn} /> } 
-        />
       </div>
     )
   };
