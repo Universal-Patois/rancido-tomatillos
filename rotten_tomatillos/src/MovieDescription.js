@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
 
-const MovieDescription = ({ selectedMovie, clickBackButton }) => {
+const MovieDescription = ({ selectedMovie }) => {
+  if (!selectedMovie) {
+    return (<div>Error 404: Movie ID does not exist.</div>)
+  }
     return (
       <div className="single-movie" 
            style={{
@@ -16,7 +19,7 @@ const MovieDescription = ({ selectedMovie, clickBackButton }) => {
           <h4 className="rating">Rating: {selectedMovie.average_rating}</h4>
           <h4 className="release-date">Release Date: {selectedMovie.release_date}</h4>
           <Link to='/'>
-            <button onClick={clickBackButton}>Back</button>
+            <button>Back</button>
           </Link>
 
         </div>
