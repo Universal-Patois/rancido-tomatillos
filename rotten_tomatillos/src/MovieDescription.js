@@ -4,7 +4,9 @@ import './MovieDescription.css';
 
 const MovieDescription = ({ selectedMovie }) => {
   if (!selectedMovie) {
-    return (<div>Error 404: Movie ID does not exist.</div>)
+    return (
+      <div className="movie-info">Error 404: Movie ID does not exist.</div>
+    )
   }
     return (
       <div className="single-movie" 
