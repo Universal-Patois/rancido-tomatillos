@@ -26,7 +26,7 @@ componentDidMount = () => {
         <h1 className='App-header'>Rancid Tomatillos</h1>
         {this.state.error && <h2>{this.state.error}</h2>}
         <Switch>
-          <Route exact path='/' render={() => <Movies movies={this.state.movies} selectMovie={this.selectMovie} /> } />
+          <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} selectMovie={this.selectMovie} /> } />
           <Route path='/:id' render={({ match }) => {
             const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id) )
             return <MovieDescription selectedMovie={selectedMovie} />
