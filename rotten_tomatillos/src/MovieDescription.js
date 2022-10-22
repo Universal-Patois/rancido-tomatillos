@@ -12,7 +12,6 @@ class MovieDescription extends Component {
 
   componentDidMount = () => {
     const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies' + window.location.pathname
-    console.log("URL", url);
     fetch(url)
     .then(response => response.json())
     .then(data => this.setState({movie: data.movie}))
@@ -26,33 +25,32 @@ class MovieDescription extends Component {
       )
     }
     return (
-      
       <div className="single-movie" 
         style={{
           backgroundImage: `url(${this.state.movie.backdrop_path})`, 
           backgroundSize: '100vw',
         }}
       >
-      <img className='movie-image' src={this.state.movie.poster_path}></img>
-      <div className="movie-info">
-        <h3>{this.state.movie.title}</h3>
-        {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
-        <h4>{this.state.movie.genres.reduce((acc, cur) => {
-            acc += `${cur} `
-            return acc
-          }, '')
-        }</h4>
-        <h4>Synopsis: {this.state.movie.overview}</h4>
-        <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
-        <h4>Runtime: {this.state.movie.runtime} minutes</h4>
-        <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
-        <h4>Budget: {this.state.movie.budget} Revenue: {this.state.movie.revenue} </h4>
-        <Link to='/'>
-          <button>Back</button>
-        </Link>
+        <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
+        <div className="movie-info">
+          <h3>{this.state.movie.title}</h3>
+          {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
+          <h4>{this.state.movie.genres.reduce((acc, cur) => {
+              acc += `${cur} `
+              return acc
+            }, '')
+          }</h4>
+          <h4>Synopsis: {this.state.movie.overview}</h4>
+          <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
+          <h4>Runtime: {this.state.movie.runtime} minutes</h4>
+          <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
+          <h4>Budget: ${this.state.movie.budget} Revenue: ${this.state.movie.revenue} </h4>
+          <Link to='/'>
+            <button>Back</button>
+          </Link>
+        </div>
       </div>
-    </div>
-  )
+    )
 
   }
 }

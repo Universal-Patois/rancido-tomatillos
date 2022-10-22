@@ -1,11 +1,20 @@
 .single-movie{
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
 }
 
+.individual-movie-image {
+  height: 400px;
+  margin: 3vw;
+}
+
 .movie-info {
+  word-wrap: normal;
   padding: 2vw;
-  margin: 2vh 0vh;
+  margin: 3vw;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
