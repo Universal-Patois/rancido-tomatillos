@@ -6,49 +6,53 @@ class MovieDescription extends Component {
   constructor({selectedMovie}) {
     super()
     this.state = {
-      id: selectedMovie.id,
-      title: selectedMovie.title,
-      backdrop_path: selectedMovie.backdrop_path,
-      poster_path: selectedMovie.poster_path,
-      average_rating: selectedMovie.average_rating,
-      release_date: selectedMovie.release_date
+      id: selectedMovie,
     }
   }
 
   componentDidMount = () => {
-    const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/' + this.state.id
-    console.log(url);
+    const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies' + window.location.pathname
+    console.log("URL", url);
     fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data.movie))
+    .then(data => this.setState({movie: data.movie}))
     .catch(error => this.setState({error: error.message}))
-    console.log(this.state.selectedMovie)
   }
-  // if (!id) {
-  //   return (
-  //     <div className="movie-info">Error 404: Movie ID does not exist.</div>
-  //   )
-  // }
-  render() {
-        return (
-      <div className="single-movie" 
-           style={{
-            backgroundImage: `url(${this.state.backdrop_path})`, 
-            backgroundSize: '100vw',
-          }}
-          >
-        <img className='movie-image' src={this.state.poster_path}></img>
-        <div className="movie-info">
-          <h3>Title: {this.state.title}</h3>
-          <h4 className="rating">Rating: {this.state.average_rating}</h4>
-          <h4 className="release-date">Release Date: {this.state.release_date}</h4>
-          <Link to='/'>
-            <button>Back</button>
-          </Link>
 
-        </div>
+  render() {
+    if (!this.state.movie) {
+      return (
+        <div className="movie-info">Error 404: Movie ID does not exist.</div>
+      )
+    }
+    return (
+      
+      <div className="single-movie" 
+        style={{
+          backgroundImage: `url(${this.state.movie.backdrop_path})`, 
+          backgroundSize: '100vw',
+        }}
+      >
+      <img className='movie-image' src={this.state.movie.poster_path}></img>
+      <div className="movie-info">
+        <h3>{this.state.movie.title}</h3>
+        {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
+        <h4>{this.state.movie.genres.reduce((acc, cur) => {
+            acc += `${cur} `
+            return acc
+          }, '')
+        }</h4>
+        <h4>Synopsis: {this.state.movie.overview}</h4>
+        <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
+        <h4>Runtime: {this.state.movie.runtime} minutes</h4>
+        <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
+        <h4>Budget: {this.state.movie.budget} Revenue: {this.state.movie.revenue} </h4>
+        <Link to='/'>
+          <button>Back</button>
+        </Link>
       </div>
-    )
+    </div>
+  )
 
   }
 }
