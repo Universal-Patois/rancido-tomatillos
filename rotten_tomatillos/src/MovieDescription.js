@@ -20,9 +20,9 @@ class MovieDescription extends Component {
   render() {
     if (!this.state.movie) {
       return (
-        <div className="movie-info">Error 404: Movie ID does not exist.</div>
+        <div className="movie-info">Getting your information. Please Wait.</div>
       )
-    }
+    } 
     return (
       <div className="single-movie" 
         style={{
