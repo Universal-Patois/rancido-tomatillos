@@ -1,32 +1,57 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
 
-const MovieDescription = ({ selectedMovie }) => {
-  if (!selectedMovie) {
-    return (
-      <div className="movie-info">Error 404: Movie ID does not exist.</div>
-    )
+class MovieDescription extends Component {
+  constructor({}) {
+    super()
+    this.state = {
+    }
   }
+
+  componentDidMount = () => {
+    const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies' + window.location.pathname
+    fetch(url)
+    .then(response => response.json())
+    .then(data => this.setState({movie: data.movie}))
+    .catch(error => this.setState({error: error.message}))
+  }
+
+  render() {
+    if (!this.state.movie) {
+      return (
+        <div className="movie-info">Error 404: Movie ID does not exist.</div>
+      )
+    }
     return (
       <div className="single-movie" 
-           style={{
-            backgroundImage: `url(${selectedMovie.backdrop_path})`, 
-            backgroundSize: '100vw',
-          }}
-          >
-        <img className='movie-image' src={selectedMovie.poster_path}></img>
+        style={{
+          backgroundImage: `url(${this.state.movie.backdrop_path})`, 
+          backgroundSize: '100vw',
+        }}
+      >
+        <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
         <div className="movie-info">
-          <h3>Title: {selectedMovie.title}</h3>
-          <h4 className="rating">Rating: {selectedMovie.average_rating}</h4>
-          <h4 className="release-date">Release Date: {selectedMovie.release_date}</h4>
+          <h2>{this.state.movie.title}</h2>
+          {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
+          <h4>{this.state.movie.genres.reduce((acc, cur) => {
+              acc += `${cur} `
+              return acc
+            }, '')
+          }</h4>
+          <h4>Synopsis: {this.state.movie.overview}</h4>
+          <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
+          <h4>Runtime: {this.state.movie.runtime} minutes</h4>
+          <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
+          <h4>Budget: ${this.state.movie.budget} Revenue: ${this.state.movie.revenue} </h4>
           <Link to='/'>
             <button>Back</button>
           </Link>
-
         </div>
       </div>
     )
+
+  }
 }
 
 export default MovieDescription;
