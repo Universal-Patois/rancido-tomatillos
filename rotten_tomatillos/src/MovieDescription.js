@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import './MovieDescription.css';
 
 class MovieDescription extends Component {
-  constructor({selectedMovie}) {
+  constructor({}) {
     super()
     this.state = {
-      id: selectedMovie,
     }
   }
 
@@ -33,7 +32,7 @@ class MovieDescription extends Component {
       >
         <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
         <div className="movie-info">
-          <h3>{this.state.movie.title}</h3>
+          <h2>{this.state.movie.title}</h2>
           {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
           <h4>{this.state.movie.genres.reduce((acc, cur) => {
               acc += `${cur} `

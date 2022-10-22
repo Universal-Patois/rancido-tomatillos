@@ -25,13 +25,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className='App-header'>Rancid Tomatillos</h1>
-        {this.state.error && <h2>{this.state.error}</h2>}
+        {this.state.error && <h2>{this.state.error.message}</h2>}
         <Switch>
           <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} /> } />
-          <Route path='/:id' render={({ match }) => {
-            return <MovieDescription selectedMovie={match.params.id} />
-          }}
-          />
+          <Route path='/:id' render={({ match }) => {return <MovieDescription selectedMovie={match.params.id} /> }} />
         </Switch>
       </div>
     )
