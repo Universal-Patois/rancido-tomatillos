@@ -20,7 +20,7 @@ describe('App', () => {
 
   it('should show movie info when I click on a poster', () => {
     cy.get('img[src="https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg"]').click()
-    cy.get('h3').contains('Money Plane')
+    cy.get('h2').contains('Money Plane')
   })
 
 
