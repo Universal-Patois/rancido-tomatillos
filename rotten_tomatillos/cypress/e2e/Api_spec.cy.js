@@ -1,3 +1,4 @@
+// beforeEach(() => {cy.visit('http://localhost:3000/')})
 describe('api calls', () => {
 
   it('should be able to get movie posters from local fixture', () => {
@@ -12,6 +13,7 @@ describe('api calls', () => {
     cy.visit('http://localhost:3000/')
     cy.get('h1').contains('Rancid Tomatillos')
     cy.get('a img').should('have.attr', 'src').should('include', 'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg')
+
   })
 
   it('should display error status in case of failed API fetch', () => {
@@ -44,4 +46,20 @@ describe('api calls', () => {
       []
     )
   })
+
+  it('shows an error when the movies cannot be displayed', () => {
+    cy.intercept(
+      {
+        method: 'GET',
+        url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
+      },{
+        forceNetworkError: true
+      }).as('movies')
+      
+      cy.visit('http://localhost:3000/')
+
+      cy.get('.error-message')
+        .should('be.visible')
+  })
+  
 })

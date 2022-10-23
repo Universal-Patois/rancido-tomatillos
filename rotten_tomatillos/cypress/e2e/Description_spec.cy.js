@@ -4,7 +4,7 @@ beforeEach(() => {cy.get('img[src="https://image.tmdb.org/t/p/original//6CoRTJTm
 
 describe('movie description page', () => {
 
-  it('should display only/exactly one movies infromation', () => {
+  it('should display only/exactly one movies information', () => {
     cy.get('img[src="https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg"]').click()
     cy.get('.single-movie').should('have.length', 1)
   })

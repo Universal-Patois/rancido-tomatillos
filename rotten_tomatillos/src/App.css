@@ -23,6 +23,11 @@
   display: none;
 }
 
+.error-message {
+  font-size: 3em;
+  color: rgb(8, 120, 92);
+}
+
 body {
   background-color: black;
   color: white;
