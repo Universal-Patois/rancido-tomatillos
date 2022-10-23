@@ -6,12 +6,19 @@ class Search extends Component {
     super()
     this.state = {
       query: '',
-      error: false
+      error: false,
+      sort: ''
     }
   }
 
   handleChange = (event) => {
-    this.setState({query: event.target.value})
+    if (event.target.name === 'search'){
+      this.setState({query: event.target.value})
+    } else if (event.target.value === 'rating') {
+      this.setState({...this.state, sort: 'rating'})
+    } else if (event.target.value === 'releaseDate') {
+      this.setState({...this.state, sort: 'releaseDate'})
+    }
   }
 
   submitSearch = (event) => {
@@ -44,6 +51,8 @@ class Search extends Component {
   render() {
     return (
       <section>
+      <input type="radio" value="rating" name="sort" onChange={event => this.handleChange(event)}/> Movies by  Highest Rating
+      <input type="radio" value="releaseDate" name="sort" onChange={event => this.handleChange(event)}/> Movies by Newest
       <input 
       type='text' 
       name='search' 
