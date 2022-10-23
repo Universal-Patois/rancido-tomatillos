@@ -23,7 +23,7 @@ class App extends Component {
     .catch(error => this.setState({error: error.message}))
   }
 
-  addMovie = (movie) => {
+  addMovie = (movie) => { 
     this.setState({selectedMovie: movie})
   }
 
