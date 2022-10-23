@@ -16,6 +16,7 @@ class Search extends Component {
       this.setState({query: event.target.value})
     } else if (event.target.value === 'rating') {
       this.setState({...this.state, sort: 'rating'})
+      this.sortMovies()
     } else if (event.target.value === 'releaseDate') {
       this.setState({...this.state, sort: 'releaseDate'})
     }
@@ -33,6 +34,13 @@ class Search extends Component {
       return movie.title === this.state.query
     })
     movie ? this.props.addMovie(movie) : this.errorMessage()
+  }
+
+  sortMovies = () => {
+    const sortedMovies = this.props.movies.sort((a ,b) => { 
+      return b.average_rating - a.average_rating
+    })
+    this.props.filterMovies(sortedMovies)
   }
   
   clearInput = () => {

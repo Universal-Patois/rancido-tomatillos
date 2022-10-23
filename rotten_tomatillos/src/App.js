@@ -25,7 +25,10 @@ class App extends Component {
 
   addMovie = (movie) => {
     this.setState({selectedMovie: movie})
+  }
 
+  filterMovies = (movies) => {
+    this.setState({movies: movies})
   }
 
   render() { 
@@ -33,7 +36,7 @@ class App extends Component {
       <div className="App">
         <h1 className='App-header'>Rancid Tomatillos</h1>
 
-        <Search movies={this.state.movies} addMovie={this.addMovie}/>
+        <Search movies={this.state.movies} addMovie={this.addMovie} filterMovies={this.filterMovies}/>
         {this.state.error && <h2 className='error-message'>{this.state.error}</h2>}
 
         {/* add loading info */}
