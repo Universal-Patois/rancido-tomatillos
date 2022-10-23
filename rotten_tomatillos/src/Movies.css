@@ -1,10 +1,10 @@
 .movie-image {
   width: 20vw;
-  margin: 20px;
-
 }
 
 .movies-container {
+  padding: 3%;
   display: grid;
+  gap: 3%;
   grid-template-columns: 1fr 1fr 1fr 1fr ;
 }

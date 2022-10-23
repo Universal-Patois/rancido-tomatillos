@@ -8,10 +8,7 @@ const Movies = ({ movies }) => {
 
     return (
       <Link to={`${movie.id}`}  key={movie.id}>
-        <img 
-          className='movie-image' 
-          src={movie.poster_path} 
-        />
+        <img className='movie-image' src={movie.poster_path}/>
       </Link>
     )
   })
