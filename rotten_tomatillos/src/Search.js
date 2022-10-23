@@ -22,6 +22,7 @@ class Search extends Component {
 
   searchMovie = () => {
     const movie = this.props.movies.find(movie => {
+      window.location.pathname = `/${movie.id}`
       return movie.title === this.state.query
     })
     movie ? this.props.addMovie(movie) : this.errorMessage()

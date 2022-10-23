@@ -42,7 +42,6 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} /> } />
           <Route path='/:id' render={({ match }) => {return <MovieDescription selectedMovie={match.params.id} /> }} />
-          <Route path='/:id' render={() => <MovieDescription  /> } />
         </Switch>
       </div>
     )
