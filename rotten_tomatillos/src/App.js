@@ -23,9 +23,12 @@ class App extends Component {
     .catch(error => this.setState({error: error.message}))
   }
 
-  addMovie = (movie) => {
+  addMovie = (movie) => { 
     this.setState({selectedMovie: movie})
+  }
 
+  filterMovies = (movies) => {
+    this.setState({movies: movies})
   }
 
   render() { 
@@ -33,7 +36,7 @@ class App extends Component {
       <div className="App">
         <h1 className='App-header'>Rancid Tomatillos</h1>
 
-        <Search movies={this.state.movies} addMovie={this.addMovie}/>
+        <Search movies={this.state.movies} addMovie={this.addMovie} filterMovies={this.filterMovies}/>
         {this.state.error && <h2 className='error-message'>{this.state.error}</h2>}
 
         {/* add loading info */}
@@ -42,7 +45,6 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} /> } />
           <Route path='/:id' render={({ match }) => {return <MovieDescription selectedMovie={match.params.id} /> }} />
-          <Route path='/:id' render={() => <MovieDescription  /> } />
         </Switch>
       </div>
     )
