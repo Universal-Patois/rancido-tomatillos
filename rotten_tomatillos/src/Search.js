@@ -32,18 +32,14 @@ class Search extends Component {
 
   searchMovie = () => {
     const movie = this.props.movies.find(movie => {
-      window.location.pathname = `/${movie.id}`
-      return movie.title === this.state.query
+      const foundMovie = movie.title === this.state.query
+      if (foundMovie) {
+        window.location.pathname = `/${movie.id}`
+        return foundMovie
+      }
     })
     movie ? this.props.addMovie(movie) : this.errorMessage()
   }
-
-  // sortMovies = () => {
-  //   const sortedMovies = this.props.movies.sort((a ,b) => { 
-  //     return b[this.state.sort] - a[this.state.sort]
-  //   })
-  //   this.props.filterMovies(sortedMovies)
-  // }
 
   sortMoviesByRating = () => {
     const sortedMovies = this.props.movies.sort((a ,b) => { 
@@ -79,18 +75,18 @@ class Search extends Component {
   render() {
     return (
       <section>
-      <input type="radio" value="average_rating" name="sort" onChange={event => this.handleChange(event)}/> Movies by  Highest Rating
-      <input type="radio" value="release_date" name="sort" onChange={event => this.handleChange(event)}/> Movies by Newest
-      <input 
-      type='text' 
-      name='search' 
-      value={this.state.query} 
-      placeholder='Search for a movie here...' 
-      onChange={event => this.handleChange(event)}
-      />
-      <button onClick={event => this.submitSearch(event)}>Search</button>
-      {this.state.error && <h2>Sorry! No movies were found. Please check that your spelling is correct and try again.</h2>}
-    </section>
+        <input type="radio" value="average_rating" name="sort" onChange={event => this.handleChange(event)}/> Movies by  Highest Rating
+        <input type="radio" value="release_date" name="sort" onChange={event => this.handleChange(event)}/> Movies by Newest
+        <input 
+        type='text' 
+        name='search' 
+        value={this.state.query} 
+        placeholder='Search for a movie here...' 
+        onChange={event => this.handleChange(event)}
+        />
+        <button onClick={event => this.submitSearch(event)}>Search</button>
+        {this.state.error && <h2>Sorry! No movies were found. Please check that your spelling is correct and try again.</h2>}
+      </section>
     )
   }
 }

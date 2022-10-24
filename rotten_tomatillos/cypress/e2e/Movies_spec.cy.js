@@ -23,5 +23,10 @@ describe('App', () => {
     cy.get('h2').contains('Money Plane')
   })
 
+  it('should be able to find movie by title', () => {
+    cy.get('[type="text"]').type('Mulan').should('have.value', 'Mulan')
+    cy.get('section > button').click()
+    cy.get('h2').contains('Mulan')
+  })
 
 })
