@@ -12,7 +12,7 @@ describe('movie description page', () => {
   it('should be able to go back to the main page from the movie description page', () => {
     cy.get('img[src="https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg"]').click()
     cy.url().should('eq', 'http://localhost:3000/694919')
-    cy.get('button').click()
+    cy.get('.back-home').click()
     cy.url().should('eq', 'http://localhost:3000/')
   })
 
