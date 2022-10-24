@@ -47,7 +47,7 @@ class MovieDescription extends Component {
               <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
               <h4>Budget: ${this.state.movie.budget} Revenue: ${this.state.movie.revenue} </h4>
               <Link to='/'>
-                <button>Back</button>
+                <button className="back-home">Back</button>
               </Link>
             </div>
           </div>
