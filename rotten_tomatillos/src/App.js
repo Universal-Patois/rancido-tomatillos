@@ -5,6 +5,7 @@ import MovieDescription from './MovieDescription.js';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchMovies } from './apiCalls.js';
+import thinking from './thinking.gif'
 
 class App extends Component {
   constructor() {
@@ -38,10 +39,10 @@ class App extends Component {
 
         <Search movies={this.state.movies} addMovie={this.addMovie} filterMovies={this.filterMovies}/>
         {this.state.error && <h2 className='error-message'>{this.state.error}</h2>}
-
+        
         {/* add loading info */}
         {this.state.error && <h2>Error! Movies not found :( </h2>}
-
+        {this.state.movies.length === 0 && <img src={thinking} width="100px"/>} 
         <Switch>
           <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} /> } />
           <Route path='/:id' render={({ match }) => {return <MovieDescription selectedMovie={match.params.id} /> }} />

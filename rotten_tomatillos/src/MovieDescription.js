@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
+import thinking from './thinking.gif'
+
 
 class MovieDescription extends Component {
   constructor({}) {
@@ -18,22 +20,23 @@ class MovieDescription extends Component {
   }
 
   render() {
+    
     if (!this.state.movie) {
       return (
         <>
-          <div className="movie-info">Getting your information. Please Wait.
-          <h2 className="error-message">Error: Movie ID does not exist :</h2>
-          </div>
         </>
       )
     } 
-    return (
+    return (    
+      <>
       <div className="single-movie" 
-        style={{
-          backgroundImage: `url(${this.state.movie.backdrop_path})`, 
-          backgroundSize: '100vw',
-        }}
+      style={{
+        backgroundImage: `url(${this.state.movie.backdrop_path})`, 
+        backgroundSize: '100vw',
+      }}
       >
+        {!this.state === 0 && <img src={thinking} width="100px"/>}
+        {this.state.error && <h2 className="error-message">Error: Movie ID does not exist :</h2>} 
         <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
         <div className="movie-info">
           <h2>{this.state.movie.title}</h2>
@@ -53,6 +56,7 @@ class MovieDescription extends Component {
           </Link>
         </div>
       </div>
+      </>
     )
 
   }
