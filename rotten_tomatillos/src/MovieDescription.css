@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
+  
 }
 
 .individual-movie-image {
@@ -12,12 +13,17 @@
 }
 
 .movie-info {
-  word-wrap: normal;
+  background-color: rgba(52, 52, 52, 0.6);
   padding: 2vw;
   margin: 3vw;
-  background-color: rgba(255, 255, 255, 0.6);
+  word-wrap: normal;
 }
 
-.hidden {
-  display: none;
+.back-home {
+  border-radius: 10%;
+  background-color:  rgb(8, 120, 92);
+  color: white;
+  font-size: 2em;
+  font-family: 'Metal Lady';
+  padding: 10px;
 }

@@ -1,0 +1,15 @@
+.filter-container {
+  background-color: rgb(51, 56, 61);
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  width: 100vw;
+}
+
+.search-button {
+  background-color:  rgb(8, 120, 92);
+  border-radius: 10%;
+  color: white;
+  font-size: 13px;
+}
