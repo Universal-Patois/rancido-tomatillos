@@ -13,7 +13,7 @@
 Rancid Tomatillos is a paired project from module 3 of Turing School of Software & Design. It is a simple web app that displays movie information. The user is able to view a grid of movie posters and click on one to see more information about that movie. One can also sort the movies by select criteria and search for a movie by name.
 
 - [The spec and rubric can be found here](https://frontend.turing.edu/projects/module-3/rancid-tomatillos-v3.html). 
-- [The deployed link can be accessed here](https://rottentomatillos.vercel.app/539885). 
+- [The deployed link can be accessed here](https://rottentomatillos.vercel.app). 
 - [GitHub link can be found here](https://github.com/Universal-Patois/rottenTomatillos).
 
 #### Project Board 
