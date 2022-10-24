@@ -74,18 +74,25 @@ class Search extends Component {
 
   render() {
     return (
-      <section>
-        <input type="radio" value="average_rating" name="sort" onChange={event => this.handleChange(event)}/> Movies by  Highest Rating
-        <input type="radio" value="release_date" name="sort" onChange={event => this.handleChange(event)}/> Movies by Newest
-        <input 
-        type='text' 
-        name='search' 
-        value={this.state.query} 
-        placeholder='Search for a movie here...' 
-        onChange={event => this.handleChange(event)}
-        />
-        <button onClick={event => this.submitSearch(event)}>Search</button>
-        {this.state.error && <h2>Sorry! No movies were found. Please check that your spelling is correct and try again.</h2>}
+      <section className='filter-container'>
+        <div> 
+          <input type="radio" value="average_rating" name="sort" onChange={event => this.handleChange(event)}/> Sort by  Highest Rating
+        </div>
+        <div>
+          <input type="radio" value="release_date" name="sort" onChange={event => this.handleChange(event)}/> Sort by Newest
+        </div>
+        <div>
+          <input
+          className='.search-bar' 
+          type='text' 
+          name='search' 
+          value={this.state.query} 
+          placeholder='Search for a movie here' 
+          onChange={event => this.handleChange(event)}
+          />
+          <button className='search-button' onClick={event => this.submitSearch(event)}>Search</button>
+          {this.state.error && <h2>Sorry! No movies were found. Please check that your spelling is correct and try again.</h2>}
+        </div>
       </section>
     )
   }

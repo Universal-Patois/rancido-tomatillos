@@ -26,8 +26,9 @@ class MovieDescription extends Component {
         <>
           <div className="single-movie" 
           style={{
-            backgroundImage: `url(${this.state.movie.backdrop_path})`, 
-            backgroundSize: '100vw',
+            backgroundImage: `url(${this.state.movie.backdrop_path})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 'cover',
           }}
           >
             {!this.state === 0 && <img src={thinking} width="100px"/>}
