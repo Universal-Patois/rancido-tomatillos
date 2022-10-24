@@ -38,7 +38,20 @@ describe('App', () => {
   it('should filter movie by average rating', () => {
     cy.wait(500)
     cy.get('[value="average_rating"]').click()
-    cy.get('[href="/694919"] > .movie-image')
+    cy.get('[href="/694919"] > .movie-image').should('be.visible')
+    cy.get('[href="/718444"] > .movie-image').should('be.visible')
+    cy.get('[href="/500840"] > .movie-image').should('be.visible')
+    cy.get('[href="/581392"] > .movie-image').should('be.visible')
   })
+
+  it('should filter movie by release date', () => {
+    cy.wait(500)
+    cy.get('[value="release_date"]').click()
+    cy.get('[href="/694919"] > .movie-image').should('be.visible')
+    cy.get('[href="/737568"] > .movie-image').should('be.visible')
+    cy.get('[href="/528085"] > .movie-image').should('be.visible')
+    cy.get('[href="/694919"] > .movie-image').should('be.visible')
+  })
+
 
 })
