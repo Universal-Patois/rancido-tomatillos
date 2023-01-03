@@ -1,54 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Search from '../search/Search.js';
 import Movies from "../movies/Movies.js";
 import MovieDescription from '../movieDescription/MovieDescription.js';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { fetchMovies } from '../utilities/apiCalls.js';
-import thinking from '../media/thinking.gif'
+import thinking from '../assets/thinking.gif'
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: [],
-      selectedMovie: '',
-      error: '',
-    }
-  }
+  // filterMovies = (movies) => {
+  //   this.setState({ movies: movies })
+  // }
+
+const App = () => {
   
-  componentDidMount = () => {
+  const [movies, setMovies] = useState([])
+  const [selectedMovie, setSelectedMovie] = useState('')
+  const [error, setError] = useState('')
+  
+  useEffect(() => {
     fetchMovies()
-    .then(data => this.setState({movies: data.movies}))
-    .catch(error => this.setState({error: error.message}))
-  }
-
-  addMovie = (movie) => { 
-    this.setState({selectedMovie: movie})
-  }
-
-  filterMovies = (movies) => {
-    this.setState({movies: movies})
-  }
-
-  render() { 
-    return (
-      <div className="App">
+    .then(data => setMovies(data.movies))
+    .catch(error => setError(error.message))
+  },[])
+  
+  return (
+    <div className="App">
         <h1 className='App-header'>Rancid Tomatillos</h1>
 
-        <Search movies={this.state.movies} addMovie={this.addMovie} filterMovies={this.filterMovies} assignURL={this.assignURL}/>
-        {this.state.error && <h2 className='error-message'>{this.state.error}</h2>}
-        
+        {/* <Search movies={movies} addMovie={setSelectedMovie} filterMovies={setMovies} assignURL={this.assignURL} /> */}
+        {error && <h2 className='error-message'>{error}</h2>}
+
         {/* add loading info */}
-        {this.state.error && <h2>Error! Movies not found :( </h2>}
-        {this.state.movies.length === 0 && <img src={thinking} width="100px"/>} 
+        {error && <h2>Error! Movies not found</h2>}
+        {movies.length === 0 && <img src={thinking} width="100px" />}
         <Switch>
-          <Route exact path='/' render={() => <Movies className='Movies' movies={this.state.movies} /> } />
-          <Route exact path='/:id' render={({ match }) => {return <MovieDescription selectedMovie={match.params.id} /> }} />
+          <Route exact path='/' render={() => <Movies className='Movies' movies={movies} />} />
+          {/* <Route exact path='/:id' render={({ match }) => { return <MovieDescription selectedMovie={match.params.id} /> }} /> */}
         </Switch>
       </div>
-    )
-  };
+  )
 }
 
 export default App;
