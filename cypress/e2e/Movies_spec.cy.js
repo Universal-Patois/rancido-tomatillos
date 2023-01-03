@@ -52,6 +52,3 @@ describe('App', () => {
     cy.get('[href="/528085"] > .movie-image').should('be.visible')
     cy.get('[href="/694919"] > .movie-image').should('be.visible')
   })
-
-
-})
