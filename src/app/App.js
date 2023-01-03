@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Search from './Search.js';
-import Movies from "./Movies.js";
-import MovieDescription from './MovieDescription.js';
+import Search from '../search/Search.js';
+import Movies from "../movies/Movies.js";
+import MovieDescription from '../movieDescription/MovieDescription.js';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { fetchMovies } from './apiCalls.js';
-import thinking from './thinking.gif'
+import { fetchMovies } from '../utilities/apiCalls.js';
+import thinking from '../media/thinking.gif'
 
 class App extends Component {
   constructor() {
@@ -17,7 +17,6 @@ class App extends Component {
     }
   }
   
-
   componentDidMount = () => {
     fetchMovies()
     .then(data => this.setState({movies: data.movies}))
