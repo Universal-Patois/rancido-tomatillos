@@ -1,36 +1,47 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
 import thinking from '../assets/thinking.gif'
+import { fetchMovieData } from "../utilities/apiCalls";
 
 
-const MovieDescription = () => {
-  
+const MovieDescription = ({movieId}) => {
+
+console.log(movieId)
+const [movieData, setMovieDescription] = useState('')
+const [error, setError] = useState('')
+
+useEffect(() => {
+  fetchMovieData(movieId)
+  .then(data => setMovieDescription(data.movie))
+  .catch(error => setError(error.message))
+},[])
+
   return (
     <>
       <div className="single-movie"
         style={{
-          backgroundImage: `url(${this.state.movie.backdrop_path})`,
+          backgroundImage: `url(${movieData.backdrop_path})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: 'cover',
         }}
       >
-        {!this.state === 0 && <img src={thinking} width="100px" />}
-        {this.state.error && <h2 className="error-message">Error: Movie ID does not exist :</h2>}
-        <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
+        {!movieData && <img src={thinking} width="100px" />}
+        {error && <h2 className="error-message">Error: Movie ID does not exist :</h2>}
+        <img className='individual-movie-image' src={movieData.poster_path}></img>
         <div className="movie-info">
-          <h2>{this.state.movie.title}</h2>
-          {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
-          <h4>{this.state.movie.genres.reduce((acc, cur) => {
-            acc += `${cur} `
+          <h2>{movieData.title}</h2>
+          {movieData.tagline && <h4>"{movieData.tagline}"</h4>}
+          {movieData.genres && <h4>{movieData.genres.reduce((acc, genre) => {
+            acc += `${genre} `
             return acc
           }, '')
-          }</h4>
-          <h4>Synopsis: {this.state.movie.overview}</h4>
-          <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
-          <h4>Runtime: {this.state.movie.runtime} minutes</h4>
-          <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
-          <h4>Budget: ${this.state.movie.budget} Revenue: ${this.state.movie.revenue} </h4>
+          }</h4>}
+          <h4>Synopsis: {movieData.overview}</h4>
+          <h4 className="rating">Average rating: {Math.round(movieData.average_rating * 100) / 100}</h4>
+          <h4>Runtime: {movieData.runtime} minutes</h4>
+          <h4 className="release-date">Release Date: {movieData.release_date}</h4>
+          <h4>Budget: ${movieData.budget} Revenue: ${movieData.revenue} </h4>
           <Link to='/'>
             <button className="back-home">Back</button>
           </Link>
@@ -41,56 +52,3 @@ const MovieDescription = () => {
 }
 
 export default MovieDescription;
-// class MovieDescription extends Component {
-//   constructor({ }) {
-//     super()
-//     this.state = {
-//     }
-//   }
-
-  componentDidMount = () => {
-    const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies' + window.location.pathname
-    fetch(url)
-      .then(response => response.json())
-      .then(data => this.setState({ movie: data.movie }))
-      .catch(error => this.setState({ error: error.message }))
-  }
-
-//   render() {
-
-//     if (this.state.movie) {
-//       return (
-//         <>
-//           <div className="single-movie"
-//             style={{
-//               backgroundImage: `url(${this.state.movie.backdrop_path})`,
-//               backgroundRepeat: "no-repeat",
-//               backgroundSize: 'cover',
-//             }}
-//           >
-//             {!this.state === 0 && <img src={thinking} width="100px" />}
-//             {this.state.error && <h2 className="error-message">Error: Movie ID does not exist :</h2>}
-//             <img className='individual-movie-image' src={this.state.movie.poster_path}></img>
-//             <div className="movie-info">
-//               <h2>{this.state.movie.title}</h2>
-//               {this.state.movie.tagline && <h4>"{this.state.movie.tagline}"</h4>}
-//               <h4>{this.state.movie.genres.reduce((acc, cur) => {
-//                 acc += `${cur} `
-//                 return acc
-//               }, '')
-//               }</h4>
-//               <h4>Synopsis: {this.state.movie.overview}</h4>
-//               <h4 className="rating">Average rating: {Math.round(this.state.movie.average_rating * 100) / 100}</h4>
-//               <h4>Runtime: {this.state.movie.runtime} minutes</h4>
-//               <h4 className="release-date">Release Date: {this.state.movie.release_date}</h4>
-//               <h4>Budget: ${this.state.movie.budget} Revenue: ${this.state.movie.revenue} </h4>
-//               <Link to='/'>
-//                 <button className="back-home">Back</button>
-//               </Link>
-//             </div>
-//           </div>
-//         </>
-//       )
-//     }
-//   }
-// }

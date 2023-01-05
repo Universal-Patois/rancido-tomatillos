@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Search from '../search/Search.js';
-import Movies from "../movies/Movies.js";
+import React from 'react';
 import MovieDescription from '../movieDescription/MovieDescription.js';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
-import { fetchMovies } from '../utilities/apiCalls.js';
-import thinking from '../assets/thinking.gif'
 import MoviesPage from '../moviesPage/MoviesPage.js';
-
-  // filterMovies = (movies) => {
-  //   this.setState({ movies: movies })
-  // }
 
 const App = () => {
   
