@@ -1,18 +1,19 @@
 import React, { Component, useState } from 'react';
 import './Search.css';
 
-const Search = ({data}) => {
+const Search = ({ movies }) => {
 
   const [suggestions, setSuggestions] = useState([])
-  const [suggestionsIndex, setSuggestionsIndex] = useState(0)
+  const [suggestionIndex, setSuggestionsIndex] = useState(0)
   const [suggestionsActive, setSuggestionActive] = useState(false)
   const [value, setValue] = useState('')
 
   const handleChange = (event) => {
-    const query = event.target.value.toLowerCase()
+    const query = event.target.value
     setValue(query)
     if (query.length > 1) {
-      const filterSuggestions = data.filter(suggestion => suggestion.toLowerCase.indexOf(query) > -1)
+      const filterSuggestions = movies.filter(movie => movie.title.indexOf(query) > -1)
+      console.log(filterSuggestions)
       setSuggestions(filterSuggestions)
       setSuggestionActive(true)
     } else {
@@ -27,20 +28,56 @@ const Search = ({data}) => {
   }
 
   const handleKeyDown = (event) => {
-    if(event.keyCode === 38) {
-      //could refactor to (!suggestionsIndex)?
-      if(suggestionsIndex === 0) {
+    if (event.keyCode === 38) {
+      if (suggestionIndex === 0) {
         return
       }
-      setSuggestionsIndex(suggestionsIndex - 1)
+      setSuggestionsIndex(suggestionIndex - 1)
     } else if (event.keyCode === 40) {
-      if(suggestionsIndex - 1 === suggestions.length) {
+      if (suggestionIndex - 1 === suggestions.length) {
         return
       }
       setSuggestionsIndex(setSuggestionsIndex + 1)
-    } else if (event.keyCode === )
+    } else if (event.keyCode === 13) {
+      setValue(suggestions[suggestionIndex])
+      setSuggestionsIndex(0)
+      setSuggestionActive(false)
+    }
   }
+
+  const Suggestions = () => {
+    return (
+      <ul className="suggestions">
+        {suggestions.map((movieSuggestion, index) => {
+          return (
+            <li
+              className={index === suggestionIndex ? "active" : ""}
+              key={index}
+              onClick={handleClick}
+            >
+              {movieSuggestion.title}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
+  return (
+    <div className="autocomplete">
+      <input
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
+      {suggestionsActive && <Suggestions />}
+    </div>
+  );
+
 }
+
+export default Search
 
 // class Search extends Component {
 //   constructor() {
