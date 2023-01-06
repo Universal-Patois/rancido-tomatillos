@@ -7,6 +7,10 @@
   width: 100vw;
 }
 
+.search-bar {
+  width: 11em;
+}
+
 .search-button {
   background-color:  rgb(8, 120, 92);
   border-radius: 10%;

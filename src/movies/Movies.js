@@ -7,10 +7,10 @@ const Movies = ({ movies }) => {
   const movieCards = movies.map(movie => {
 
     return (
-      <Link to={`/movie/${movie.id}`}  key={movie.id}>
-        <img 
-          className='movie-image' 
-          src={movie.poster_path} 
+      <Link to={`/movie/${movie.id}`} key={movie.id}>
+        <img
+          className='movie-image'
+          src={movie.poster_path}
         />
       </Link>
     )
