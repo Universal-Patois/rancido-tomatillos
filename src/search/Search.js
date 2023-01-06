@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import './Search.css';
 
 const Search = ({ movies }) => {
@@ -9,14 +9,20 @@ const Search = ({ movies }) => {
   const [value, setValue] = useState('')
 
   const handleChange = (event) => {
-    const query = titleCase(event.target.value)
-    setValue(query)
-    if (query.length > 1) {
-      const filterSuggestions = movies.filter(movie => movie.title.indexOf(query) > -1)
-      setSuggestions(filterSuggestions)
-      setSuggestionActive(true)
-    } else {
-      setSuggestionActive(false)
+    if (event.target.name === 'search-bar') {
+      const query = titleCase(event.target.value)
+      setValue(query)
+      if (query.length > 1) {
+        const filterSuggestions = movies.filter(movie => movie.title.indexOf(query) > -1)
+        setSuggestions(filterSuggestions)
+        setSuggestionActive(true)
+      } else {
+        setSuggestionActive(false)
+      }
+    } else if (event.target.value === 'average_rating') {
+
+    } else if (event.target.value === 'release_date') {
+
     }
   }
 
@@ -50,6 +56,13 @@ const Search = ({ movies }) => {
     }).join(' ');
   }
 
+  const submitSearch = () => {
+    const getMovieId = movies.find(movie => {
+      return movie.title === value
+    })
+    window.location.pathname = `movie/${getMovieId.id}`
+  }
+
   const Suggestions = () => {
     return (
       <ul className="suggestions">
@@ -71,21 +84,22 @@ const Search = ({ movies }) => {
   return (
     <section className='filter-container'>
       <div>
-        <input className='radio-button' type="radio" value="average_rating" name="sort" onChange={event => this.handleChange(event)} /> Sort by  Highest Rating
+        <input className='radio-button' type="radio" value="average_rating" name="sort" onChange={handleChange} /> Sort by  Highest Rating
       </div>
       <div>
-        <input className='radio-button' type="radio" value="release_date" name="sort" onChange={event => this.handleChange(event)} /> Sort by Newest
+        <input className='radio-button' type="radio" value="release_date" name="sort" onChange={handleChange} /> Sort by Newest
       </div>
       <div>
         <input
           className='search-bar'
+          name='search-bar'
           type="text"
           value={value}
           placeholder='Search for a movie here...'
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <button className='search-button' onClick={event => this.submitSearch(event)}>Search</button>
+        <button className='search-button' onClick={submitSearch}>Search</button>
         {suggestionsActive && <Suggestions />}
       </div>
     </section>
@@ -95,10 +109,8 @@ const Search = ({ movies }) => {
 export default Search
 
 
-{/* handleChange = (event) => {
-    if (event.target.name === 'search') {
-      this.setState({ query: event.target.value })
-    } else if (event.target.value === 'average_rating') {
+{/* 
+    else if (event.target.value === 'average_rating') {
       this.setState({ ...this.state, sort: 'average_rating' })
       this.sortMoviesByRating()
     } else if (event.target.value === 'release_date') {
@@ -107,11 +119,6 @@ export default Search
     }
   } */}
 
-{/* submitSearch = (event) => {
-    event.preventDefault()
-    this.searchMovie()
-    this.clearInput()
-  } */}
 
 {/* sortMoviesByRating = () => {
     const sortedMovies = this.props.movies.sort((a, b) => {
@@ -129,8 +136,4 @@ export default Search
       return b.release_date - a.release_date
     })
     this.props.filterMovies(sortedMovies)
-  } */}
-
-{/* clearInput = () => {
-    this.setState({ query: '' })
   } */}
