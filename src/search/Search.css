@@ -1,0 +1,39 @@
+.filter-container {
+  background-color: rgb(51, 56, 61);
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  width: 100vw;
+}
+
+.search-bar {
+  background-color: rgb(31, 33, 35);
+  color: azure;
+  width: 14em;
+}
+
+.search-button {
+  background-color:  rgb(8, 120, 92);
+  border-radius: 10%;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.radio-button {
+  accent-color:  rgb(11, 146, 112);
+  cursor: pointer;
+}
+
+li {
+  cursor: pointer;
+}
+
+li:hover  {
+  color:  rgb(13, 168, 129);
+}
+
+.active {
+  color: rgb(8, 120, 92);
+}
