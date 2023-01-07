@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Search.css';
 
-const Search = ({ movies }) => {
+const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }) => {
 
   const [suggestions, setSuggestions] = useState([])
   const [suggestionIndex, setSuggestionsIndex] = useState(0)
@@ -20,9 +20,9 @@ const Search = ({ movies }) => {
         setSuggestionActive(false)
       }
     } else if (event.target.value === 'average_rating') {
-
+      sortMoviesByRating()
     } else if (event.target.value === 'release_date') {
-
+      sortMoviesByDate()
     }
   }
 
@@ -57,10 +57,10 @@ const Search = ({ movies }) => {
   }
 
   const submitSearch = () => {
-    const getMovieId = movies.find(movie => {
+    const movieId = movies.find(movie => {
       return movie.title === value
     })
-    window.location.pathname = `movie/${getMovieId.id}`
+    window.location.pathname = `movie/${movieId.id}`
   }
 
   const Suggestions = () => {
@@ -110,10 +110,10 @@ export default Search
 
 
 {/* 
-    else if (event.target.value === 'average_rating') {
+
       this.setState({ ...this.state, sort: 'average_rating' })
       this.sortMoviesByRating()
-    } else if (event.target.value === 'release_date') {
+
       this.setState({ ...this.state, sort: 'release_date' })
       this.sortMoviesByDate()
     }
