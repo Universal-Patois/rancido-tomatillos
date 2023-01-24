@@ -18,7 +18,7 @@ const MovieDescription = ({ movieId }) => {
 
   return (
     <>
-      {!movieData && <img src={thinking} width="300px" />}
+      {!movieData && <img src={thinking} width="300px" alt=""/>}
       {error && <h2 className="error-message">Error: {error}</h2>}
       {movieData.backdrop_path &&
         <div className="single-movie"
@@ -28,7 +28,7 @@ const MovieDescription = ({ movieId }) => {
             backgroundSize: 'cover',
           }}
         >
-          <img className='individual-movie-image' src={movieData.poster_path}></img>
+          <img className='individual-movie-image' src={movieData.poster_path} alt="Movie poster" ></img>
           <div className="movie-info">
             <h2>{movieData.title}</h2>
             <h4>"{movieData.tagline}"</h4>

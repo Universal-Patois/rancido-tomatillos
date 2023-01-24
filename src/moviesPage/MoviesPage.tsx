@@ -36,7 +36,7 @@ const MoviesPage = () => {
   return (
     <div className="movies-page">
       {error && <h2 className='error-message'>Error: {error}</h2>}
-      {movies.length === 0 && <img src={thinking} width="300px" />}
+      {movies.length === 0 && <img src={thinking} width="300px" alt="" />}
       <Search movies={movies} sortMoviesByDate={sortMoviesByDate} sortMoviesByRating={sortMoviesByRating} />
       <Movies className='Movies' movies={movies} />
     </div>

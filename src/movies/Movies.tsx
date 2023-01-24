@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './Movies.css'
 
-const Movies = ({ movies }) => {
+type MovieProps = { movies: Array<{ id: number, poster_path: string, title: string }> }
+
+const Movies = ({ movies }: MovieProps ) => {
 
   const movieCards = movies.map(movie => {
 
@@ -11,6 +13,7 @@ const Movies = ({ movies }) => {
         <img
           className='movie-image'
           src={movie.poster_path}
+          alt={movie.title}
         />
       </Link>
     )

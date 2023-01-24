@@ -48,7 +48,7 @@ As our first foray into using React, the coding process started out surprisingly
 ![sort date](src/images/by-date.png)
 
 ## Access Website
-- When the user visits the application [here](https://rottentomatillos.vercel.app), they will be able to see a page populated with movie posters. If they click a poster they will be able to see the details for that specific movie. They can then return to the home page by clicking the "Back" button on that page or in the internet browser.
+- When the user visits the application [here](https://rancido-tomatillos.vercel.app/), they will be able to see a page populated with movie posters. If they click a poster they will be able to see the details for that specific movie. They can then return to the home page by clicking the "Back" button on that page or in the internet browser.
 
 - Each page has a unique URL that can be bookmarked or manually typed in the address bar.
 

@@ -107,33 +107,3 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }) => {
 }
 
 export default Search
-
-
-{/* 
-
-      this.setState({ ...this.state, sort: 'average_rating' })
-      this.sortMoviesByRating()
-
-      this.setState({ ...this.state, sort: 'release_date' })
-      this.sortMoviesByDate()
-    }
-  } */}
-
-
-{/* sortMoviesByRating = () => {
-    const sortedMovies = this.props.movies.sort((a, b) => {
-      return b.average_rating - a.average_rating
-    })
-    this.props.filterMovies(sortedMovies)
-  } */}
-
-{/* sortMoviesByDate = () => {
-    const sortedMovies = this.props.movies.map(movie => {
-      const newDates = new Date(movie.release_date)
-      movie.release_date = newDates
-      return movie
-    }).sort((a, b) => {
-      return b.release_date - a.release_date
-    })
-    this.props.filterMovies(sortedMovies)
-  } */}
