@@ -4,11 +4,14 @@ import './MovieDescription.css';
 import thinking from '../assets/thinking.gif'
 import { fetchMovieData } from "../utilities/apiCalls";
 
+type MovieIdProps = { movieId: string }
 
-const MovieDescription = ({ movieId }) => {
+const MovieDescription = ({ movieId }: MovieIdProps) => {
 
-  const [movieData, setMovieDescription] = useState('')
+  const [movieData, setMovieDescription] = useState({})
   const [error, setError] = useState('')
+
+  console.log(movieData)
 
   useEffect(() => {
     fetchMovieData(movieId)

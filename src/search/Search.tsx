@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent, KeyboardEvent, ChangeEvent } from 'react';
+import Suggestions from '../suggestions/Suggestions';
 import './Search.css';
 
-const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }) => {
+type Movie = { 
+    id: number, 
+    poster_path: string, 
+    title: string, 
+    release_date: string, 
+    average_rating: number 
+  }
 
-  const [suggestions, setSuggestions] = useState([])
+  type SearchProps = {
+    movies: Movie[],
+    sortMoviesByDate: () => void,
+    sortMoviesByRating: () => void,
+  }
+
+const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) => {
+
+  const [suggestions, setSuggestions] = useState<Array<Movie>>([])
   const [suggestionIndex, setSuggestionsIndex] = useState(0)
   const [suggestionsActive, setSuggestionActive] = useState(false)
   const [value, setValue] = useState('')
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === 'search-bar') {
       const query = titleCase(event.target.value)
       setValue(query)
       if (query.length > 1) {
-        const filterSuggestions = movies.filter(movie => movie.title.indexOf(query) > -1)
+        const filterSuggestions = movies.filter((movie: Movie) => movie.title.indexOf(query) > -1)
         setSuggestions(filterSuggestions)
         setSuggestionActive(true)
       } else {
@@ -26,59 +41,45 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }) => {
     }
   }
 
-  const handleClick = (event) => {
+  const handleClick = (event: MouseEvent<HTMLLIElement>) => {
     setSuggestions([])
     setValue(event.target.innerText)
     setSuggestionActive(false)
   }
 
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 38) {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "ArrowUp") {
       if (suggestionIndex === 0) {
         return
       }
       setSuggestionsIndex(suggestionIndex - 1)
-    } else if (event.keyCode === 40) {
+    } else if (event.key === "ArrowDown") {
       if (suggestionIndex - 1 === suggestions.length) {
         return
       }
       setSuggestionsIndex(suggestionIndex + 1)
-    } else if (event.keyCode === 13) {
+    } else if (event.key === "Enter") {
       setValue(suggestions[suggestionIndex].title)
       setSuggestionsIndex(0)
       setSuggestionActive(false)
     }
   }
 
-  const titleCase = (string) => {
+  const titleCase = (string: string) => {
     return string.toLowerCase().split(' ').map((word) => {
       return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ');
   }
 
   const submitSearch = () => {
+    // change from type any
     const movieId = movies.find(movie => {
       return movie.title === value
     })
-    window.location.pathname = `movie/${movieId.id}`
-  }
 
-  const Suggestions = () => {
-    return (
-      <ul className="suggestions">
-        {suggestions.map((movieSuggestion, index) => {
-          return (
-            <li
-              className={index === suggestionIndex ? "active" : ""}
-              key={index}
-              onClick={handleClick}
-            >
-              {movieSuggestion.title}
-            </li>
-          );
-        })}
-      </ul>
-    );
+  console.log(movieId)
+    // use useParams hook
+    window.location.pathname = `movie/${movieId.id}`
   }
 
   return (
@@ -100,7 +101,7 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }) => {
           onKeyDown={handleKeyDown}
         />
         <button className='search-button' onClick={submitSearch}>Search</button>
-        {suggestionsActive && <Suggestions />}
+        {suggestionsActive && <Suggestions suggestions={suggestions} suggestionsIndex={suggestionIndex} handleClick={handleClick} />}
       </div>
     </section>
   );
