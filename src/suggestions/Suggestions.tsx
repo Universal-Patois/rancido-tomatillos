@@ -16,15 +16,10 @@ type SuggestionsProps = {
 
 const Suggestions = ({ suggestions, suggestionIndex, handleClick }: SuggestionsProps) => {
 
-  type MovieSuggestionProp = {
-    movieSuggestion: { 
-      title: string },
-      index: number
-  }
 
   return (
     <ul className="suggestions">
-      {suggestions.map(({movieSuggestion, index}: MovieSuggestionProp) => {
+      {suggestions.map((movieSuggestion: Movie, index: number) => {
         return (
           <li
             className={index === suggestionIndex ? "active" : ""}
