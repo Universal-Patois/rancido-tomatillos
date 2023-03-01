@@ -19,7 +19,7 @@ type Movie = {
 const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) => {
 
   const [suggestions, setSuggestions] = useState<Array<Movie>>([])
-  const [suggestionIndex, setSuggestionsIndex] = useState(0)
+  const [suggestionIndex, setSuggestionIndex] = useState(0)
   const [suggestionsActive, setSuggestionActive] = useState(false)
   const [value, setValue] = useState('')
 
@@ -41,9 +41,9 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) =
     }
   }
 
-  const handleClick = (event: MouseEvent<HTMLLIElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     setSuggestions([])
-    setValue(event.target.innerText)
+    setValue((event.target as HTMLElement)?.innerText)
     setSuggestionActive(false)
   }
 
@@ -52,15 +52,15 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) =
       if (suggestionIndex === 0) {
         return
       }
-      setSuggestionsIndex(suggestionIndex - 1)
+      setSuggestionIndex(suggestionIndex - 1)
     } else if (event.key === "ArrowDown") {
       if (suggestionIndex - 1 === suggestions.length) {
         return
       }
-      setSuggestionsIndex(suggestionIndex + 1)
+      setSuggestionIndex(suggestionIndex + 1)
     } else if (event.key === "Enter") {
       setValue(suggestions[suggestionIndex].title)
-      setSuggestionsIndex(0)
+      setSuggestionIndex(0)
       setSuggestionActive(false)
     }
   }
@@ -73,13 +73,13 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) =
 
   const submitSearch = () => {
     // change from type any
-    const movieId = movies.find(movie => {
+    const movieId: Movie | undefined = movies.find((movie) => {
       return movie.title === value
     })
-
-  console.log(movieId)
     // use useParams hook
-    window.location.pathname = `movie/${movieId.id}`
+    if(movieId) {
+      window.location.pathname = `movie/${movieId.id}`
+    }
   }
 
   return (
@@ -101,7 +101,7 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) =
           onKeyDown={handleKeyDown}
         />
         <button className='search-button' onClick={submitSearch}>Search</button>
-        {suggestionsActive && <Suggestions suggestions={suggestions} suggestionsIndex={suggestionIndex} handleClick={handleClick} />}
+        {suggestionsActive && <Suggestions suggestions={suggestions} suggestionIndex={suggestionIndex} handleClick={handleClick} />}
       </div>
     </section>
   );
