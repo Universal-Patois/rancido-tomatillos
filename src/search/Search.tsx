@@ -6,7 +6,7 @@ type Movie = {
     id: number, 
     poster_path: string, 
     title: string, 
-    release_date: string, 
+    release_date: number, 
     average_rating: number 
   }
 
