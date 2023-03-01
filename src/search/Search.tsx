@@ -18,7 +18,7 @@ type Movie = {
 
 const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) => {
 
-  const [suggestions, setSuggestions] = useState<Array<Movie>>([])
+  const [suggestions, setSuggestions] = useState<Movie[]>([])
   const [suggestionIndex, setSuggestionIndex] = useState(0)
   const [suggestionsActive, setSuggestionActive] = useState(false)
   const [value, setValue] = useState('')

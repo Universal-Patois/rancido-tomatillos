@@ -1,27 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
-import thinking from '../assets/thinking.gif'
 import { fetchMovieData } from "../utilities/apiCalls";
 
-type MovieIdProps = { movieId: string }
+type MovieData = {
+  title: string;
+  tagline: string;
+  genres: Array<string>;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  average_rating: number;
+  runtime: number;
+  release_date: string;
+  revenue: number;
+  budget: number;
+};
 
-const MovieDescription = ({ movieId }: MovieIdProps) => {
+const MovieDescription = (movieId: { movieId: string; }) => {
 
-  const [movieData, setMovieDescription] = useState({})
+  const [movieData, setMovieDescription] = useState<MovieData>({
+    title: '',
+  tagline: '',
+  genres: [],
+  poster_path: '',
+  backdrop_path: '',
+  overview: '',
+  average_rating: 0,
+  runtime: 0,
+  release_date: '',
+  revenue: 0,
+  budget: 0
+  })
   const [error, setError] = useState('')
-
-  console.log(movieData)
 
   useEffect(() => {
     fetchMovieData(movieId)
       .then(data => setMovieDescription(data.movie))
       .catch(error => setError(error.message))
-  }, [])
+  }, [movieId])
 
   return (
     <>
-      {!movieData && <img src={thinking} width="300px" alt=""/>}
+      {!movieData && <img src='../assets/loading.gif' width="300px" alt=""/>}
       {error && <h2 className="error-message">Error: {error}</h2>}
       {movieData.backdrop_path &&
         <div className="single-movie"
@@ -44,7 +65,8 @@ const MovieDescription = ({ movieId }: MovieIdProps) => {
             <h4 className="rating">Average rating: {Math.round(movieData.average_rating * 100) / 100}</h4>
             <h4>Runtime: {movieData.runtime} minutes</h4>
             <h4 className="release-date">Release Date: {movieData.release_date}</h4>
-            <h4>Budget: ${movieData.budget} Revenue: ${movieData.revenue} </h4>
+            <h4>Budget: {!movieData.budget ? ' N/A' : '$' + movieData.budget}</h4>
+            <h4>Revenue: {!movieData.revenue ? ' N/A' : '$' + movieData.revenue}</h4>
             <Link to='/'>
               <button className="back-home">Back</button>
             </Link>

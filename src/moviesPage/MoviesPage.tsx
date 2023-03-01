@@ -45,7 +45,7 @@ const MoviesPage = () => {
   return (
     <div className="movies-page">
       {error && <h2 className='error-message'>Error: {error}</h2>}
-      {movies.length === 0 && <img src={'../assets/loading.gif'} width="300px" alt="loading icon" />}
+      {movies.length === 0 && <img src='../assets/loading.gif' width="300px" alt="loading icon" />}
       <Search movies={movies} sortMoviesByDate={sortMoviesByDate} sortMoviesByRating={sortMoviesByRating} />
       <Movies movies={movies} />
     </div>
