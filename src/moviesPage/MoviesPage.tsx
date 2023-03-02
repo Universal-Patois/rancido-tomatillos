@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react"
 import Movies from "../movies/Movies";
 import Search from "../search/Search"
-import thinking from '../assets/thinking.gif'
-import { fetchMovies } from '../utilities/apiCalls';
+import { fetchMovies } from "../utilities/apiCalls";
+
+type Movie = {
+  id: number,
+  poster_path: string,
+  title: string,
+  release_date: number,
+  average_rating: number
+}
 
 const MoviesPage = () => {
 
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState<Movie[]>([])
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -16,18 +23,20 @@ const MoviesPage = () => {
   }, [])
 
   const sortMoviesByDate = () => {
-    const moviesByDate = movies.map(movie => {
-      const newDates = new Date(movie.release_date)
-      movie.release_date = newDates
-      return movie
-    }).sort((a, b) => {
+    const moviesByDate = movies.map((movie: Movie) => {
+      const newDate = new Date(movie.release_date)
+        return {
+          ...movie,
+          release_date: newDate.getTime()
+        }
+    }).sort((a: Movie, b: Movie) => {
       return b.release_date - a.release_date
     })
     setMovies([...moviesByDate])
   }
 
   const sortMoviesByRating = () => {
-    const moviesByRating = movies.sort((a, b) => {
+    const moviesByRating = movies.sort((a: Movie, b: Movie) => {
       return b.average_rating - a.average_rating
     })
     setMovies([...moviesByRating])
@@ -36,9 +45,9 @@ const MoviesPage = () => {
   return (
     <div className="movies-page">
       {error && <h2 className='error-message'>Error: {error}</h2>}
-      {movies.length === 0 && <img src={thinking} width="300px" />}
+      {movies.length === 0 && <img src='../assets/loading.gif' width="300px" alt="loading icon" />}
       <Search movies={movies} sortMoviesByDate={sortMoviesByDate} sortMoviesByRating={sortMoviesByRating} />
-      <Movies className='Movies' movies={movies} />
+      <Movies movies={movies} />
     </div>
   )
 }

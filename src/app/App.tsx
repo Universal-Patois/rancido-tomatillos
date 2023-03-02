@@ -1,8 +1,8 @@
 import React from 'react';
-import MovieDescription from '../movieDescription/MovieDescription.js';
+import MovieDescription from '../movieDescription/MovieDescription';
 import { Route } from 'react-router-dom';
 import './App.css';
-import MoviesPage from '../moviesPage/MoviesPage.js';
+import MoviesPage from '../moviesPage/MoviesPage';
 
 const App = () => {
 
