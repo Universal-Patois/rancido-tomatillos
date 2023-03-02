@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, KeyboardEvent, ChangeEvent } from 'react';
+import React, { useState, KeyboardEvent, ChangeEvent } from 'react';
 import Suggestions from '../suggestions/Suggestions';
 import './Search.css';
 

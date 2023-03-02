@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
 import { Link } from 'react-router-dom';
 import './MovieDescription.css';
 import { fetchMovieData } from "../utilities/apiCalls";
@@ -40,6 +41,10 @@ const MovieDescription = (movieId: { movieId: string; }) => {
       .catch(error => setError(error.message))
   }, [movieId])
 
+  const formatNumber = (num: number) => {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
+
   return (
     <>
       {!movieData && <img src='../assets/loading.gif' width="300px" alt=""/>}
@@ -64,9 +69,9 @@ const MovieDescription = (movieId: { movieId: string; }) => {
             <h4>Synopsis: {movieData.overview}</h4>
             <h4 className="rating">Average rating: {Math.round(movieData.average_rating * 100) / 100}</h4>
             <h4>Runtime: {movieData.runtime} minutes</h4>
-            <h4 className="release-date">Release Date: {movieData.release_date}</h4>
-            <h4>Budget: {!movieData.budget ? ' N/A' : '$' + movieData.budget}</h4>
-            <h4>Revenue: {!movieData.revenue ? ' N/A' : '$' + movieData.revenue}</h4>
+            <h4 className="release-date">Release Date: {dayjs(movieData.release_date).format('MMMM DD, YYYY')}</h4>
+            <h4>Budget: {!movieData.budget ? ' N/A' : '$' + formatNumber(movieData.budget)}</h4>
+            <h4>Revenue: {!movieData.revenue ? ' N/A' : '$' + formatNumber(movieData.revenue)}</h4>
             <Link to='/'>
               <button className="back-home">Back</button>
             </Link>
