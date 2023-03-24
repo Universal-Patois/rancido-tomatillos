@@ -1,11 +1,11 @@
 import React from "react";
 
-type Movie = { 
-  id: number, 
-  poster_path: string, 
-  title: string, 
-  release_date: number, 
-  average_rating: number 
+type Movie = {
+  id: number,
+  poster_path: string,
+  title: string,
+  release_date: number,
+  average_rating: number
 }
 
 type SuggestionsProps = {
@@ -23,7 +23,7 @@ const Suggestions = ({ suggestions, suggestionIndex, handleClick }: SuggestionsP
         return (
           <li
             className={index === suggestionIndex ? "active" : ""}
-            key={index}
+            key={movieSuggestion.id}
             onClick={handleClick}
           >
             {movieSuggestion.title}

@@ -4,7 +4,7 @@ import './Movies.css'
 
 type MovieProps = { movies: Array<{ id: number, poster_path: string, title: string }> }
 
-const Movies = ({ movies }: MovieProps ) => {
+const Movies = ({ movies }: MovieProps) => {
 
   const movieCards = movies.map(movie => {
 
