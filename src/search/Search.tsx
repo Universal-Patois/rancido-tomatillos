@@ -2,19 +2,19 @@ import React, { useState, KeyboardEvent, ChangeEvent } from 'react';
 import Suggestions from '../suggestions/Suggestions';
 import './Search.css';
 
-type Movie = { 
-    id: number, 
-    poster_path: string, 
-    title: string, 
-    release_date: number, 
-    average_rating: number 
-  }
+type Movie = {
+  id: number,
+  poster_path: string,
+  title: string,
+  release_date: number,
+  average_rating: number
+}
 
-  type SearchProps = {
-    movies: Movie[],
-    sortMoviesByDate: () => void,
-    sortMoviesByRating: () => void,
-  }
+type SearchProps = {
+  movies: Movie[],
+  sortMoviesByDate: () => void,
+  sortMoviesByRating: () => void,
+}
 
 const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) => {
 
@@ -77,7 +77,7 @@ const Search = ({ movies, sortMoviesByDate, sortMoviesByRating }: SearchProps) =
       return movie.title === value
     })
     // use useParams hook
-    if(movieId) {
+    if (movieId) {
       window.location.pathname = `movie/${movieId.id}`
     }
   }

@@ -25,10 +25,10 @@ const MoviesPage = () => {
   const sortMoviesByDate = () => {
     const moviesByDate = movies.map((movie: Movie) => {
       const newDate = new Date(movie.release_date)
-        return {
-          ...movie,
-          release_date: newDate.getTime()
-        }
+      return {
+        ...movie,
+        release_date: newDate.getTime()
+      }
     }).sort((a: Movie, b: Movie) => {
       return b.release_date - a.release_date
     })
@@ -36,7 +36,7 @@ const MoviesPage = () => {
   }
 
   const sortMoviesByRating = () => {
-    const moviesByRating = movies.sort((a: Movie, b: Movie) => {
+    const moviesByRating = movies.slice().sort((a: Movie, b: Movie) => {
       return b.average_rating - a.average_rating
     })
     setMovies([...moviesByRating])

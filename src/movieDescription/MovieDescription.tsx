@@ -22,16 +22,16 @@ const MovieDescription = (movieId: { movieId: string; }) => {
 
   const [movieData, setMovieDescription] = useState<MovieData>({
     title: '',
-  tagline: '',
-  genres: [],
-  poster_path: '',
-  backdrop_path: '',
-  overview: '',
-  average_rating: 0,
-  runtime: 0,
-  release_date: '',
-  revenue: 0,
-  budget: 0
+    tagline: '',
+    genres: [],
+    poster_path: '',
+    backdrop_path: '',
+    overview: '',
+    average_rating: 0,
+    runtime: 0,
+    release_date: '',
+    revenue: 0,
+    budget: 0
   })
   const [error, setError] = useState('')
 
@@ -47,7 +47,7 @@ const MovieDescription = (movieId: { movieId: string; }) => {
 
   return (
     <>
-      {!movieData && <img src='../assets/loading.gif' width="300px" alt=""/>}
+      {!movieData && <img src='../assets/loading.gif' width="300px" alt="" />}
       {error && <h2 className="error-message">Error: {error}</h2>}
       {movieData.backdrop_path &&
         <div className="single-movie"

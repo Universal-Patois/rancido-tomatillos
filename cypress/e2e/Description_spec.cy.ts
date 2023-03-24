@@ -15,3 +15,4 @@ describe('movie description page', () => {
     cy.get('.back-home').click()
     cy.url().should('eq', 'http://localhost:3000/')
   })
+})
